@@ -1,0 +1,148 @@
+1. Crear 1 Clase MarvelHeroes considerando lo siguiente:
+
+ - El personaje tendra atributos de NombrePila y NombrePersonaje
+ - El personaje se llama Peter Parker y su alias es Spiderman
+ - Utilizar un constructor abreviado utilizando required
+ - El mensaje en consola sería: "Hola mi nombre es PETER PARKER pero me conocen como tu amigable vecino SPIDERMAN"
+ - Adjuntar pantalla de su codigo
+
+
+class MarvelHeroes {
+  final String NombrePila;
+  final String NombrePersonaje;
+
+  MarvelHeroes({required this.NombrePila, required this.NombrePersonaje});
+
+  void presentarse() {
+    print('Hola mi nombre es $NombrePila pero me conocen como tu amigable vecino $NombrePersonaje');
+  }
+}
+
+void main() {
+  MarvelHeroes peterParker = MarvelHeroes(
+    NombrePila: 'Peter Parker',
+    NombrePersonaje: 'Spiderman',
+  );
+
+  peterParker.presentarse();
+}
+
+
+
+
+
+
+
+2.Crear 1 Clase DCHeroes considerando lo siguiente:
+
+ - El personaje tendra atributos de NombrePila y NombrePersonaje
+ - Se utilizara un mapa de datos llamado DCJson
+ - Utilizar un constructor con nombre que se llame fromDCJson
+ - Debe estar protegido y en caso algun dato no exista remitir un mensaje automatico en consola: "No tiene nombre" y "No tiene alias"
+ - El mensaje en consola sería: "Hola mi nombre es Bruce Wayne pero me conocen como el caballero de la noche Batman"
+ - Adjuntar pantalla de su codigo
+
+
+class DCHeroes {
+  late String NombrePila;
+  late String NombrePersonaje;
+
+  DCHeroes.fromDCJson(Map<String, String> DCJson) {
+    this.NombrePila = DCJson['NombrePila'] ?? _mostrarError('NombrePila');
+    this.NombrePersonaje = DCJson['NombrePersonaje'] ?? _mostrarError('NombrePersonaje');
+  }
+
+  static String _mostrarError(String campo) {
+    print('No tiene $campo');
+    return '';
+  }
+
+  void presentarse() {
+    print('Hola mi nombre es $NombrePila pero me conocen como el caballero de la noche $NombrePersonaje');
+  }
+}
+
+void main() {
+  Map<String, String> DCJson = {
+    'NombrePila': 'Bruce Wayne',
+    'NombrePersonaje': 'Batman',
+  };
+
+  DCHeroes batman = DCHeroes.fromDCJson(DCJson);
+  batman.presentarse();
+}
+
+
+
+
+
+
+
+3. En los ejemplos anteriores agregar un constructor con parámetros en cada uno de las clases y crear diferentes objetos con diferentes constructores
+
+
+
+class MarvelHeroes {
+  final String NombrePila;
+  final String NombrePersonaje;
+
+  MarvelHeroes({required this.NombrePila, required this.NombrePersonaje});
+
+  // Constructor con parámetros
+  MarvelHeroes.fromParameters(String nombrePila, String nombrePersonaje)
+      : NombrePila = nombrePila,
+        NombrePersonaje = nombrePersonaje;
+
+  void presentarse() {
+    print(
+        'Hola mi nombre es $NombrePila pero me conocen como $NombrePersonaje');
+  }
+}
+
+class DCHeroes {
+  late String NombrePila;
+  late String NombrePersonaje;
+
+  DCHeroes.fromDCJson(Map<String, String> DCJson) {
+    this.NombrePila = DCJson['NombrePila'] ?? _mostrarError('NombrePila');
+    this.NombrePersonaje =
+        DCJson['NombrePersonaje'] ?? _mostrarError('NombrePersonaje');
+  }
+
+  // Constructor con parámetros
+  DCHeroes.fromParameters(String nombrePila, String nombrePersonaje)
+      : NombrePila = nombrePila,
+        NombrePersonaje = nombrePersonaje;
+
+  static String _mostrarError(String campo) {
+    print('No tiene $campo');
+    return '';
+  }
+
+  void presentarse() {
+    print(
+        'Hola mi nombre es $NombrePila pero me conocen como $NombrePersonaje');
+  }
+}
+
+void main() {
+  // Crear objetos con diferentes constructores
+  MarvelHeroes peterParker = MarvelHeroes(
+    NombrePila: 'Peter Parker',
+    NombrePersonaje: 'Spiderman',
+  );
+  peterParker.presentarse();
+
+  MarvelHeroes ironMan = MarvelHeroes.fromParameters('Tony Stark', 'Iron Man');
+  ironMan.presentarse();
+
+  Map<String, String> DCJson = {
+    'NombrePila': 'Bruce Wayne',
+    'NombrePersonaje': 'Batman',
+  };
+  DCHeroes batman = DCHeroes.fromDCJson(DCJson);
+  batman.presentarse();
+
+  DCHeroes superman = DCHeroes.fromParameters('Clark Kent', 'Superman');
+  superman.presentarse();
+}
